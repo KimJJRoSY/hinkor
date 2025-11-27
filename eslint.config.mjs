@@ -17,7 +17,7 @@ export default defineConfig({
       sourceType: 'module',
     },
   },
-  ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+  ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts', '**/*.css'],
   rules: {
     // TypeScript ESLint rules
     ...tseslint.configs.recommended.rules,
