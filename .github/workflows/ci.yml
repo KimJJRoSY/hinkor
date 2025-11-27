@@ -5,22 +5,35 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  pr-lint:
-    name: PR 제목 체크
+  check-pr-title:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Check PR title
-        uses: amitsingh-007/validate-pr-title@v1
-        with:
-          # 작업타입(도메인): 작업내용
-          pattern: '^(feat|fix|docs|style|refactor|test|chore)\([a-zA-Z0-9_-]+\): .+'
-          error-message: '❌ PR 제목이 컨벤션에 맞지 않습니다. 예시: feat(login): 인증 추가'
+        shell: bash
+        run: |
+          echo "🔍 PR 제목 검사중..."
+
+          # PR 제목 가져오기
+          PR_TITLE=$(jq -r .pull_request.title "$GITHUB_EVENT_PATH")
+          echo "PR title: $PR_TITLE"
+
+          REGEX='^(feat|fix|docs|chore|refactor|test|style|perf|ci)<([A-Z][a-zA-Z0-9]*)(,[A-Z][a-zA-Z0-9]*)*>[[:space:]]*: .+$'
+
+          if [[ ! "$PR_TITLE" =~ $REGEX ]]; then
+            echo "❌ PR 제목 규칙 위반!"
+            echo "형식: 작업종류<도메인1,도메인2,...> : 작업내역"
+            echo "예시:"
+            echo "  feat<Auth,Profile> : 로그인 및 프로필 기능 구현"
+            echo "  fix<Payment> : 결제 오류 수정"
+            exit 1
+          else
+            echo "✅ PR 제목 규칙 통과!"
+          fi
 
   build:
     name: 빌드 테스트
     runs-on: ubuntu-latest
-    needs: pr-lint
+    needs: check-pr-title
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js
