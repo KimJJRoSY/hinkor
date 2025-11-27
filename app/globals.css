@@ -1,13 +1,24 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'GaramYeonGeot';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Garam.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
 
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #171717;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #182d69;
+  --color-secondary: #036836;
+  --color-accent: #f76520;
+  --font-hinko: 'GaramYeonGeot';
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
