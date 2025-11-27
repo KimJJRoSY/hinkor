@@ -36,7 +36,7 @@ export default defineConfig({
         'newlines-between': 'always',
       },
     ],
-    '@typescript-eslint/no-unused-vars': ['warn'],
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 })
