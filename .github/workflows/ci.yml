@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        shell: bash
+        run: |
+          echo "🔍 PR 제목 검사중..."
+
+          # PR 제목 가져오기
+          PR_TITLE=$(jq -r .pull_request.title "$GITHUB_EVENT_PATH")
+          echo "PR title: $PR_TITLE"
+
+          REGEX='^(feat|fix|docs|style|refactor|test|chore)<([A-Z][a-zA-Z0-9]*)(,[A-Z][a-zA-Z0-9]*)*>[[:space:]]*: .+$'
+
+          if [[ ! "$PR_TITLE" =~ $REGEX ]]; then
+            echo "❌ PR 제목 규칙 위반!"
+            echo "형식: 작업종류<도메인1,도메인2,...> : 작업내역"
+            echo "예시:"
+            echo "  feat<Auth,Profile> : 로그인 및 프로필 기능 구현"
+            echo "  fix<Payment> : 결제 오류 수정"
+            exit 1
+          else
+            echo "✅ PR 제목 규칙 통과!"
+          fi
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
