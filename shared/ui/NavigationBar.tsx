@@ -1,28 +1,35 @@
 'use client'
 import { useState } from 'react'
 import NavigationButton from './NavigationButton'
+import { useRouter } from 'next/navigation'
 
 const menu = [
   {
-    label: 'Day',
+    label: 'DAY',
     isActive: true,
   },
   {
-    label: 'Theme',
+    label: 'THEME',
     isActive: false,
   },
   {
-    label: 'Quiz',
+    label: 'QUIZ',
     isActive: false,
   },
 ]
 
 export default function NavigationBar() {
   const [navigation, setNavigation] = useState(menu)
+  const router = useRouter()
 
   const handleNavigation = (label: string) => {
     const updated = navigation.map((item) => ({ ...item, isActive: item.label === label }))
     setNavigation(updated)
+    if (label === 'DAY') {
+      router.push(`/`)
+    } else {
+      router.push(`/${label.toLowerCase()}`)
+    }
   }
 
   return (
