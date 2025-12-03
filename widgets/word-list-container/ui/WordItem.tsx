@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 export default function WordItem() {
   return (
-    <div className="bg-white p-4 border-b border-gray-100 flex gap-2 items-start">
+    <div className="bg-white p-4 border-b border-gray-200 flex gap-2 items-start">
       <span
         className={twMerge(
           'bg-[#A5D993] rounded-md w-5 h-5 text-center text-sm mt-1 text-gray-600',

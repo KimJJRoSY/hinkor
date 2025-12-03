@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="flex justify-center">
-          <div className="max-w-3xl w-full bg-white p-5">
+          <div className="max-w-3xl w-full bg-white p-5 min-h-screen">
             <Logo />
             <NavigationBar />
             {children}
