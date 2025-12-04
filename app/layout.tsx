@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Logo, NavigationBar } from '@/shared/ui'
+import { Header, NavigationBar } from '@/shared/ui'
 
 export const metadata: Metadata = {
   title: 'HINKOR',
@@ -17,7 +17,8 @@ export default function RootLayout({
       <body>
         <div className="flex justify-center">
           <div className="max-w-3xl w-full bg-white p-5 min-h-screen">
-            <Logo />
+            {/* params가 있으면 로고 대신 뒤로 가는 버튼 있어야됨 */}
+            <Header />
             <NavigationBar />
             {children}
             <footer className="mt-3 text-xs text-gray-400 text-center">
