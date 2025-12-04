@@ -1,6 +1,11 @@
 import { CategoryButton } from '@/widgets/category-container'
 import { AnswerItem, QuizItem } from '@/widgets/quiz-container'
 
+export const metadata = {
+  title: '퀴즈',
+  description: '힌디어 단어장 - 퀴즈 목록입니다',
+}
+
 export default async function QuizPage({ searchParams }: { searchParams: { id?: string } }) {
   const params = await searchParams
   const isParams = params.id ? true : false

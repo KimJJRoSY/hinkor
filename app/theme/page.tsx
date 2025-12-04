@@ -1,6 +1,10 @@
 import { CategoryButton } from '@/widgets/category-container'
 import { WordItem } from '@/widgets/word-list-container'
 import { twMerge } from 'tailwind-merge'
+export const metadata = {
+  title: '테마',
+  description: '힌디어 단어장 - 테마 목록입니다',
+}
 
 export default async function ThemePage({ searchParams }: { searchParams: { id?: string } }) {
   const params = await searchParams

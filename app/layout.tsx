@@ -3,7 +3,10 @@ import './globals.css'
 import { Header, NavigationBar } from '@/shared/ui'
 
 export const metadata: Metadata = {
-  title: 'HINKOR',
+  title: {
+    default: 'HINKOR | 힌디어 단어장',
+    template: '%s | 힌디어 단어장',
+  },
   description: '힌디어 단어장',
 }
 
