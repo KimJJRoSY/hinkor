@@ -1,3 +1,5 @@
+'use client'
+
 import { Word } from '@/entities/word'
 import { Speech } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
@@ -21,6 +23,12 @@ export default function WordItem({ word }: Props) {
     else if (position === 'adv') return 'ad'
   }
 
+  const onSpeak = () => {
+    const utter = new SpeechSynthesisUtterance(word.힌디어)
+    utter.lang = 'hi-IN'
+    speechSynthesis.speak(utter)
+  }
+
   return (
     <div className="bg-white p-4 border-b border-gray-200 flex gap-2 items-start">
       <span
@@ -39,7 +47,9 @@ export default function WordItem({ word }: Props) {
 
         <h3 className="text-base">{word.한국어}</h3>
       </div>
-      <Speech className="w-4 text-gray-400" />
+      <button onClick={onSpeak}>
+        <Speech className="w-4 text-gray-400" />
+      </button>
     </div>
   )
 }
