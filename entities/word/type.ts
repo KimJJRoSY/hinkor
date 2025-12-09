@@ -10,3 +10,5 @@ export interface Word {
   힌디발음: string
   힌디어한글발음: string
 }
+
+export type ThemeWord = Omit<Word, 'group_id' | 'value' | 'category'>
