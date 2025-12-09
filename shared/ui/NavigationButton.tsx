@@ -1,3 +1,4 @@
+import { useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 
 interface Props {
@@ -7,6 +8,15 @@ interface Props {
 }
 
 export default function NavigationButton({ label, isActive, onClick }: Props) {
+  const params = useSearchParams()
+  const id = params.get('id')
+  const getLabel = (label: string) => {
+    if (label === 'DAY' && id) {
+      return `DAY${id}`
+    } else {
+      return label
+    }
+  }
   return (
     <button
       className={twMerge(
@@ -15,7 +25,7 @@ export default function NavigationButton({ label, isActive, onClick }: Props) {
       )}
       onClick={() => onClick(label)}
     >
-      {label}
+      {getLabel(label)}
     </button>
   )
 }

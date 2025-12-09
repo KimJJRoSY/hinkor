@@ -4,19 +4,20 @@ import { usePathname, useRouter } from 'next/navigation'
 
 interface Props {
   label: string
+  id: number
 }
 
-export default function CategoryButton({ label }: Props) {
+export default function CategoryButton({ label, id }: Props) {
   const router = useRouter()
   const path = usePathname()
 
   const goToDetailPage = () => {
     if (path === '/theme') {
-      router.push(`/theme?id=${1}`)
+      router.push(`/theme?id=${id}`)
     } else if (path === '/') {
-      router.push(`/day?id=${1}`)
+      router.push(`/day?id=${id}`)
     } else if (path === '/quiz') {
-      router.push(`/quiz?id=${1}`)
+      router.push(`/quiz?id=${id}`)
     }
   }
 
