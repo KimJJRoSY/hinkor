@@ -1,26 +1,30 @@
 'use client'
 
-import { Word } from '@/entities/word'
+import { ThemeWord, Word } from '@/entities/word'
 import { Speech } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 interface Props {
-  word: Word
+  word: Word | ThemeWord
 }
 
 export default function WordItem({ word }: Props) {
   const getColors = (position: string) => {
     if (position === 'noun_m') return 'bg-[#ABD8F5]'
     else if (position === 'noun_f') return 'bg-[#FF9595]'
-    else if (position === 'verb') return 'bg-[#FEE99D]'
+    else if (position === 'verb_i') return 'bg-[#FEE99D]'
+    else if (position === 'verb_t') return 'bg-[#FFB200]'
     else if (position === 'adj') return 'bg-[#A5D993]'
     else if (position === 'adv') return 'bg-[#D9D9D9]'
+    else return 'bg-[#C59BFF]'
   }
   const getPosition = (position: string) => {
     if (position === 'noun_m') return 'n'
     else if (position === 'noun_f') return 'fn'
-    else if (position === 'verb') return 'v'
+    else if (position === 'verb_i') return 'vi'
+    else if (position === 'verb_t') return 'vt'
     else if (position === 'adj') return 'a'
     else if (position === 'adv') return 'ad'
+    else return '정보없음'
   }
 
   const onSpeak = () => {

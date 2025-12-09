@@ -11,8 +11,10 @@ export default function NavigationButton({ label, isActive, onClick }: Props) {
   const params = useSearchParams()
   const id = params.get('id')
   const getLabel = (label: string) => {
-    if (label === 'DAY' && id) {
+    if (label === 'DAY' && id && isActive) {
       return `DAY${id}`
+    } else if (label === 'THEME' && id && isActive) {
+      return id
     } else {
       return label
     }
