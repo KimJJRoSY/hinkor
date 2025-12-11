@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Header, NavigationBar } from '@/shared/ui'
 import { Suspense } from 'react'
+import { ToastContainer } from '@/shared/ui/ToastContainer'
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="flex justify-center">
-          <div className=" max-w-3xl w-full bg-white p-5 min-h-screen">
+          <div className="relative max-w-3xl w-full bg-white p-5 min-h-screen">
+            <ToastContainer />
             <div className="sticky top-0 bg-white z-50">
               <Suspense fallback={null}>
                 <Header />

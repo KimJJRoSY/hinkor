@@ -1,9 +1,11 @@
 'use client'
 import { Word } from '@/entities/word'
+import useToast from '@/shared/utils/useToast'
 import { useState, useMemo } from 'react'
 
 export function useQuiz(data: Word[]) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { success, warn } = useToast()
 
   const quizList = useMemo(() => {
     if (data.length === 0) return []
@@ -30,10 +32,10 @@ export function useQuiz(data: Word[]) {
 
   const handleQuiz = (answer: string) => {
     if (answer === quizList[currentIndex].answer) {
-      alert('정답!')
+      success('정답!')
       setCurrentIndex((prev) => prev + 1)
     } else {
-      alert('오답!')
+      warn('오답!')
     }
   }
 
