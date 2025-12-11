@@ -12,10 +12,6 @@ const menu = [
     label: 'THEME',
     isActive: false,
   },
-  {
-    label: 'QUIZ',
-    isActive: false,
-  },
 ]
 
 export default function NavigationBar() {
