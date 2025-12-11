@@ -5,9 +5,10 @@ import { Speech } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 interface Props {
   word: Word | ThemeWord
+  isHidden: boolean
 }
 
-export default function WordItem({ word }: Props) {
+export default function WordItem({ word, isHidden }: Props) {
   const getColors = (position: string) => {
     if (position === 'noun_m') return 'bg-[#ABD8F5]'
     else if (position === 'noun_f') return 'bg-[#FF9595]'
@@ -37,7 +38,7 @@ export default function WordItem({ word }: Props) {
     <div className="bg-white p-4 border-b border-gray-200 flex gap-2 items-start">
       <span
         className={twMerge(
-          'flex items-center justify-center rounded-md w-5 h-5 text-xs mt-2',
+          'flex items-center justify-center rounded-md w-5 h-5 text-xs mt-1.5',
           getColors(word.품사),
         )}
       >
@@ -49,10 +50,14 @@ export default function WordItem({ word }: Props) {
           <p className="flex-1 text-gray-400 text-xs">{word.힌디어한글발음}</p>
         </div>
 
-        <h3 className="text-base">{word.한국어}</h3>
+        {isHidden ? (
+          <div className="bg-black w-20 ">x</div>
+        ) : (
+          <h3 className="text-base">{word.한국어}</h3>
+        )}
       </div>
       <button onClick={onSpeak}>
-        <Speech className="w-4 text-gray-400" />
+        <Speech className="w-4 text-gray-400 cursor-pointer hover:translate-y-0.5" />
       </button>
     </div>
   )

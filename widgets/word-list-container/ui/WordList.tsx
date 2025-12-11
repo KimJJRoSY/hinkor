@@ -3,9 +3,10 @@
 import { Word } from '@/entities/word'
 import { supabase } from '@/shared/api/supabase/client'
 import { useEffect, useState } from 'react'
-import WordItem from './WordItem'
-import { Check } from 'lucide-react'
+import { BookOpenCheck, Check, EyeClosed, Eye } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { MoveToButton } from '@/shared/ui'
+import WordItem from './WordItem'
 
 interface Props {
   params: string
@@ -14,6 +15,7 @@ function WordList({ params }: Props) {
   const router = useRouter()
   const [wordList, setData] = useState<Word[]>()
   const [opposition, setOpposition] = useState<string>()
+  const [isHidden, setIsHidden] = useState(false)
 
   const getWordList = async () => {
     const { data } = await supabase.from('theme_list').select('*').eq('theme', params)
@@ -26,21 +28,33 @@ function WordList({ params }: Props) {
     router.push(`/theme?id=${opposition}`)
   }
 
+  const gotoQuiz = () => {
+    router.push(`/quiz?id=${params}`)
+  }
+  const handleHideMeaning = () => {
+    setIsHidden(!isHidden)
+  }
+
   useEffect(() => {
     getWordList()
+    setIsHidden(false)
   }, [params])
 
   return (
     <>
-      <div>
-        <button
-          className="flex items-center px-2 py-1 rounded border border-gray-200 text-gray-500"
-          onClick={gotoCheckOpposition}
-        >
-          <Check className="w-4" /> <p className="text-sm">반의어 확인</p>
-        </button>
+      <div className="flex justify-between">
+        <MoveToButton
+          label={isHidden ? '뜻 보기' : '뜻 가리기'}
+          icon={isHidden ? Eye : EyeClosed}
+          onClick={handleHideMeaning}
+        />
+        <MoveToButton label="반의어 확인" icon={Check} onClick={gotoCheckOpposition} />
+        {wordList && wordList.length > 3 && (
+          <MoveToButton label="퀴즈" onClick={gotoQuiz} icon={BookOpenCheck} />
+        )}
       </div>
-      {wordList && wordList.map((word) => <WordItem key={word.id} word={word} />)}
+      {wordList &&
+        wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
     </>
   )
 }
