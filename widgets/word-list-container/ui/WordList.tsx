@@ -29,7 +29,7 @@ function WordList({ params }: Props) {
   }
 
   const gotoQuiz = () => {
-    router.push(`/quiz?id=${params}`)
+    router.push(`/quiz?label=theme&id=${params}`)
   }
   const handleHideMeaning = () => {
     setIsHidden(!isHidden)

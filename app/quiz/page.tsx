@@ -1,4 +1,4 @@
-import { createServer } from '@/shared/api'
+import getQuizList from '@/entities/quiz/api/getQuizList'
 import QuizContainer from '@/widgets/quiz-container/ui/QuizContainer'
 
 export const metadata = {
@@ -12,11 +12,7 @@ export default async function QuizPage({
   searchParams: { label?: string; id?: string }
 }) {
   const params = await searchParams
-  const supabase = await createServer()
-  const { data } =
-    params.label === 'day'
-      ? await supabase.from('day_list').select('*').eq('id', params.id)
-      : await supabase.from('theme_list').select('*').eq('theme', params.id)
+  const data = await getQuizList({ label: params.label!, id: params.id! })
 
-  return <>{data && <QuizContainer data={data[0].words!} />}</>
+  return <>{<QuizContainer data={data.words} />}</>
 }
