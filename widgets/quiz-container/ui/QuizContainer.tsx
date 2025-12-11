@@ -1,9 +1,7 @@
 'use client'
 import { Word } from '@/entities/word'
-import { makeQuizList } from '@/features/quiz/hooks/makeQuizList'
-import QuizItem from './QuizItem'
-import AnswerItem from './AnswerItem'
 import { useState } from 'react'
+import { AnswerItem, makeQuizList, QuizItem } from '@/features/quiz'
 
 interface Props {
   data: Word[]

@@ -3,6 +3,7 @@ import { Word } from '@/entities/word'
 export type QuizList = { question: string; answer: string; chooseList: string[] }[]
 
 export function makeQuizList(data: Word[]) {
+  // theme이면 두 개 섞어야됨
   if (data.length === 0) {
     return []
   }
