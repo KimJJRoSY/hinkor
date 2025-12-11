@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react'
 
 export function useQuiz(data: Word[]) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const { success, warn } = useToast()
 
   const quizList = useMemo(() => {
@@ -20,7 +21,11 @@ export function useQuiz(data: Word[]) {
         .sort(() => Math.random() - 0.5)
         .slice(0, 2)
 
-      const chooseList = [item.한국어, ...wrong].sort(() => Math.random() - 0.5)
+      const chooseList = [
+        { option: item.한국어, isSelected: false },
+        { option: wrong[0], isSelected: false },
+        { option: wrong[1], isSelected: false },
+      ].sort(() => Math.random() - 0.5)
 
       return {
         question: item.힌디어,
@@ -30,17 +35,21 @@ export function useQuiz(data: Word[]) {
     })
   }, [data])
 
-  const handleQuiz = (answer: string) => {
-    if (answer === quizList[currentIndex].answer) {
-      success('정답!')
+  const handleQuiz = (option: string) => {
+    setSelectedOption(option)
+
+    if (option === quizList[currentIndex].answer) {
+      success('정답입니다!')
       setCurrentIndex((prev) => prev + 1)
+      setSelectedOption(null)
     } else {
-      warn('오답!')
+      warn('오답입니다!')
     }
   }
 
   return {
     quizList,
+    selectedOption,
     currentIndex,
     handleQuiz,
   }

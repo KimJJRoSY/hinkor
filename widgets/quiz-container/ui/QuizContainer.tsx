@@ -6,7 +6,7 @@ interface Props {
   data: Word[]
 }
 export default function QuizContainer({ data }: Props) {
-  const { quizList, handleQuiz, currentIndex } = useQuiz(data)
+  const { selectedOption, quizList, currentIndex, handleQuiz } = useQuiz(data)
 
   return (
     <>
@@ -16,9 +16,14 @@ export default function QuizContainer({ data }: Props) {
         </p>
         <div className="flex flex-col gap-8">
           <QuizItem question={quizList[currentIndex].question} />
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 items-center">
             {quizList[currentIndex].chooseList.map((i, index) => (
-              <AnswerItem option={i} onChoose={handleQuiz} key={index} />
+              <AnswerItem
+                option={i.option}
+                onChoose={handleQuiz}
+                key={index}
+                isSelected={selectedOption === i.option}
+              />
             ))}
           </div>
         </div>
