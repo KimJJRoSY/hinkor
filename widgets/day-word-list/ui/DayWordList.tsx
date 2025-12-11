@@ -1,8 +1,8 @@
 'use client'
 
 import { Word } from '@/entities/word'
+import { WordItem } from '@/features/word-list'
 import { MoveToButton } from '@/shared/ui'
-import { WordItem } from '@/widgets/word-list-container'
 import { BookOpenCheck, EyeClosed, Eye } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -32,7 +32,6 @@ export default function DayList({ params, wordList }: Props) {
         />
         <MoveToButton label="퀴즈" onClick={gotoQuiz} icon={BookOpenCheck} />
       </div>
-
       {wordList &&
         wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
     </>

@@ -1,6 +1,6 @@
 import { createServer } from '@/shared/api'
 import { Word } from '@/entities/word'
-import { DayList } from '@/widgets/day-list-container'
+import { DayWordList } from '@/widgets/day-word-list'
 
 export const metadata = {
   title: '날짜',
@@ -15,7 +15,7 @@ export default async function DayPage({ searchParams }: { searchParams: { id?: s
 
   return (
     <div className="flex flex-col gap-3 p-3 bg-white rounded-b-md rounded-r-md border border-gray-200">
-      <DayList wordList={words} params={params.id!} />
+      <DayWordList wordList={words} params={params.id!} />
     </div>
   )
 }
