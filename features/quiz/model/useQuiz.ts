@@ -1,21 +1,24 @@
 'use client'
+
 import { Word } from '@/entities/word'
 import useToast from '@/shared/utils/useToast'
 import { useState, useMemo } from 'react'
+interface Props {
+  data: Word[]
+}
 
-export function useQuiz(data: Word[]) {
+export function useQuiz({ data }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [wrongList, setWrongList] = useState<number[]>([])
   const { success, warn } = useToast()
+  const shuffled = [...data].sort(() => Math.random() - 0.5)
+  const isFinished = currentIndex === data.length
 
   const quizList = useMemo(() => {
     if (data.length === 0) return []
-
-    const shuffled = [...data].sort(() => Math.random() - 0.5)
-
     return shuffled.map((item, index) => {
       const others = shuffled.filter((_, i) => i !== index)
-
       const wrong = others
         .map((v) => v.한국어)
         .sort(() => Math.random() - 0.5)
@@ -28,6 +31,7 @@ export function useQuiz(data: Word[]) {
       ].sort(() => Math.random() - 0.5)
 
       return {
+        index: index,
         question: item.힌디어,
         answer: item.한국어,
         chooseList,
@@ -44,13 +48,21 @@ export function useQuiz(data: Word[]) {
       setSelectedOption(null)
     } else {
       warn('오답입니다!')
+      setWrongList((prev) => {
+        const set = new Set(prev)
+        set.add(currentIndex)
+        return [...set]
+      })
     }
   }
 
   return {
     quizList,
+    shuffled,
+    wrongList,
     selectedOption,
     currentIndex,
+    isFinished,
     handleQuiz,
   }
 }
