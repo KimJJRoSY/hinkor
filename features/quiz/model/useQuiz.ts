@@ -12,17 +12,15 @@ export function useQuiz({ data }: Props) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [wrongList, setWrongList] = useState<number[]>([])
   const { success, warn } = useToast()
-  const shuffled = [...data].sort(() => Math.random() - 0.5)
+  const shuffled = useMemo(() => [...data].sort(() => Math.random() - 0.5), [data])
   const isFinished = currentIndex === data.length
 
   const quizList = useMemo(() => {
     if (data.length === 0) return []
     return shuffled.map((item, index) => {
       const others = shuffled.filter((_, i) => i !== index)
-      const wrong = others
-        .map((v) => v.한국어)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 2)
+
+      const wrong = others.map((v) => v.한국어).sort(() => Math.random() - 0.5)
 
       const chooseList = [
         { option: item.한국어, isSelected: false },
@@ -31,7 +29,6 @@ export function useQuiz({ data }: Props) {
       ].sort(() => Math.random() - 0.5)
 
       return {
-        index: index,
         question: item.힌디어,
         answer: item.한국어,
         chooseList,
