@@ -12,7 +12,7 @@ export default async function getQuizList({ label, id }: Props) {
       ? await supabase.from('day_list').select('*').eq('id', id)
       : await supabase.from('theme_list').select('*').eq('theme', id)
 
-  if (!base) return []
+  if (!base || base.length === 0) return { words: [] }
 
   const current = base[0]
 
