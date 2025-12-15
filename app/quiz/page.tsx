@@ -1,25 +1,24 @@
-import { CategoryButton } from '@/widgets/category-container'
-import { AnswerItem, QuizItem } from '@/widgets/quiz-container'
+import getQuizList from '@/entities/quiz/api/getQuizList'
+import { EmptyData } from '@/shared/ui'
+import QuizContainer from '@/widgets/quiz-container/ui/QuizContainer'
 
 export const metadata = {
   title: '퀴즈',
   description: '힌디어 단어장 - 퀴즈 목록입니다',
 }
 
-export default async function QuizPage({ searchParams }: { searchParams: { id?: string } }) {
+export default async function QuizPage({
+  searchParams,
+}: {
+  searchParams: { label?: string; id?: string }
+}) {
   const params = await searchParams
-  const isParams = params.id ? true : false
 
-  return (
-    <div className="flex flex-col gap-3 p-3 bg-secondary rounded-b-md rounded-r-md">
-      {isParams ? (
-        <div className="flex flex-col  gap-3 items-center justify-center">
-          <QuizItem />
-          <AnswerItem />
-        </div>
-      ) : (
-        <CategoryButton label="퀴즈" />
-      )}
-    </div>
-  )
+  if (!params.id || !params.label) {
+    return <EmptyData />
+  }
+
+  const data = await getQuizList({ label: params.label, id: params.id })
+
+  return <QuizContainer data={data.words} />
 }

@@ -1,6 +1,6 @@
 import { createServer } from '@/shared/api'
 import { CategoryButton } from '@/widgets/category-container'
-import { WordList } from '@/widgets/word-list-container'
+import { ThemeWordList } from '@/widgets/theme-word-list'
 import { twMerge } from 'tailwind-merge'
 
 export const metadata = {
@@ -22,7 +22,7 @@ export default async function ThemePage({ searchParams }: { searchParams: { id?:
       )}
     >
       {isParams ? (
-        <WordList params={params.id!} />
+        <ThemeWordList params={params.id!} />
       ) : (
         data &&
         data.map((item) => <CategoryButton label={item.theme} id={item.theme} key={item.id} />)
