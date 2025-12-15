@@ -1,4 +1,5 @@
 import getQuizList from '@/entities/quiz/api/getQuizList'
+import { EmptyData } from '@/shared/ui'
 import QuizContainer from '@/widgets/quiz-container/ui/QuizContainer'
 
 export const metadata = {
@@ -12,7 +13,12 @@ export default async function QuizPage({
   searchParams: { label?: string; id?: string }
 }) {
   const params = await searchParams
-  const data = await getQuizList({ label: params.label!, id: params.id! })
 
-  return <>{<QuizContainer data={data.words} />}</>
+  if (!params.id || !params.label) {
+    return <EmptyData />
+  }
+
+  const data = await getQuizList({ label: params.label, id: params.id })
+
+  return <QuizContainer data={data.words} />
 }
