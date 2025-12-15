@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 interface Props {
   label: string
-  id: number
+  id: number | string
 }
 
 export default function CategoryButton({ label, id }: Props) {

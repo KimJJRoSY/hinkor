@@ -1,5 +1,5 @@
 import { createServer } from '@/shared/api'
-import { CategoryButton } from '@/widgets/category-container'
+import { CategoryButton } from '@/features/category'
 
 export default async function DayPage() {
   const supabase = await createServer()
