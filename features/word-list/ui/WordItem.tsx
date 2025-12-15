@@ -29,7 +29,7 @@ export default function WordItem({ word, isHidden }: Props) {
         </div>
 
         {isHidden ? (
-          <div className="bg-black w-20 ">x</div>
+          <div className="bg-black w-20 ">숨김</div>
         ) : (
           <h3 className="text-base">{word.한국어}</h3>
         )}
