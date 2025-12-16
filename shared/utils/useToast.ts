@@ -2,7 +2,7 @@
 
 import { useToastStore } from '../store/toast-store'
 
-export default function useToast() {
+export function useToast() {
   const addToast = useToastStore((s) => s.addToast)
   return {
     success: (msg: string) => addToast(msg, 'success'),

@@ -3,7 +3,7 @@ import { ThemeCategory } from '@/entities/word'
 import { CategoryButton } from '@/features/category'
 import { SearchBar } from '@/features/search'
 import { EmptyData } from '@/shared/ui'
-import { useDebounce } from '@/shared/utils/useDebounce'
+import { useDebounce } from '@/shared/utils'
 import { useEffect, useRef, useState } from 'react'
 
 interface Props {
@@ -13,11 +13,10 @@ interface Props {
 function ThemeCategoryList({ data }: Props) {
   const [keyword, setKeyword] = useState('')
   const debouncedKeyword = useDebounce(keyword, 300)
-
   const [filteredData, setFilteredData] = useState(data)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = (value: string) => {
+  const onInputChange = (value: string) => {
     setKeyword(value)
   }
 
@@ -41,7 +40,7 @@ function ThemeCategoryList({ data }: Props) {
   return (
     <div className="flex flex-col ">
       <div className="sticky top-18 z-40 bg-secondary h-16 flex items-center">
-        <SearchBar inputRef={inputRef} onChange={handleChange} />
+        <SearchBar inputRef={inputRef} onChange={onInputChange} />
       </div>
 
       <div>

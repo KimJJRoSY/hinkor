@@ -7,7 +7,7 @@ import { BookOpenCheck, Check, EyeClosed, Eye } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { MoveToButton } from '@/shared/ui'
 import { WordItem } from '@/features/word-list'
-import useToast from '@/shared/utils/useToast'
+import { useToast } from '@/shared/utils'
 
 interface Props {
   params: string
