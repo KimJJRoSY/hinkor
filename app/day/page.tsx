@@ -13,7 +13,7 @@ export default async function DayPage({ searchParams }: { searchParams: { id?: s
   const params = await searchParams
 
   if (!params.id) {
-    return <EmptyData />
+    return <EmptyData label={'데이터'} mode="dark" />
   }
 
   const { data } = await supabase.from('day_list').select('*').eq('id', params.id)

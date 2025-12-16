@@ -2,6 +2,7 @@
 import { ThemeCategory } from '@/entities/word'
 import { CategoryButton } from '@/features/category'
 import { SearchBar } from '@/features/search'
+import { EmptyData } from '@/shared/ui'
 import { useDebounce } from '@/shared/utils/useDebounce'
 import { useEffect, useRef, useState } from 'react'
 
@@ -38,7 +39,7 @@ function ThemeCategoryList({ data }: Props) {
   }, [debouncedKeyword])
 
   return (
-    <div className="flex flex-col min-h-[calc(100dvh-160px)]">
+    <div className="flex flex-col ">
       <div className="sticky top-18 z-40 bg-secondary h-16 flex items-center">
         <SearchBar inputRef={inputRef} onChange={handleChange} />
       </div>
@@ -50,11 +51,7 @@ function ThemeCategoryList({ data }: Props) {
               <CategoryButton label={item.theme} id={item.theme} />
             </div>
           ))}
-        {filteredData.length === 0 && (
-          <div className="flex-1 flex items-center justify-center text-white ">
-            검색 결과가 없습니다
-          </div>
-        )}
+        {filteredData.length === 0 && <EmptyData label="검색결과" mode="light" />}
       </div>
     </div>
   )
