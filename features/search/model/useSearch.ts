@@ -2,7 +2,7 @@
 
 import { ThemeCategory } from '@/entities/word'
 import { useDebounce } from '@/shared/utils'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   data: ThemeCategory
@@ -12,7 +12,6 @@ export function useSearch({ data }: Props) {
   const [keyword, setKeyword] = useState('')
   const debouncedKeyword = useDebounce(keyword, 300)
   const [filteredData, setFilteredData] = useState(data)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const onInputChange = (value: string) => {
     setKeyword(value)
@@ -26,7 +25,7 @@ export function useSearch({ data }: Props) {
       return
     }
 
-    const filtered = data.filter((item) => item.theme.startsWith(value))
+    const filtered = data.filter((item) => item.theme.includes(value))
 
     setFilteredData(filtered)
   }
@@ -35,7 +34,7 @@ export function useSearch({ data }: Props) {
     applyFilter(debouncedKeyword)
   }, [debouncedKeyword])
   return {
-    inputRef,
+    keyword,
     filteredData,
     onInputChange,
   }
