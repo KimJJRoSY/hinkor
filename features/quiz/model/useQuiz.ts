@@ -1,7 +1,7 @@
 'use client'
 
 import { Word } from '@/entities/word'
-import useToast from '@/shared/utils/useToast'
+import { useToast } from '@/shared/utils'
 import { useState, useMemo } from 'react'
 interface Props {
   data: Word[]

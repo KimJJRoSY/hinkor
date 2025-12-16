@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Header, NavigationBar } from '@/shared/ui'
+import { GotoTopButton, Header, NavigationBar } from '@/shared/ui'
 import { Suspense } from 'react'
 import { ToastContainer } from '@/shared/ui/ToastContainer'
 
@@ -29,8 +29,8 @@ export default function RootLayout({
               </Suspense>
               <NavigationBar />
             </div>
-
             {children}
+            <GotoTopButton />
             <footer className="mt-3 text-xs text-gray-400 text-center">
               All rights reserved by JeongJoo
             </footer>

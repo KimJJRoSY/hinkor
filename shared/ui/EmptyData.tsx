@@ -1,10 +1,20 @@
-import { CircleQuestionMark } from 'lucide-react'
+import { CircleAlert } from 'lucide-react'
+import { twMerge } from 'tailwind-merge'
+interface Props {
+  label: string
+  mode: 'dark' | 'light'
+}
 
-export default function EmptyData() {
+export default function EmptyData({ label, mode }: Props) {
   return (
-    <div className="flex flex-col gap-3 items-center justify-center text-gray-900 min-h-10/12">
-      <CircleQuestionMark className="text-gray-600 min-x-5" />
-      데이터가 없습니다.
+    <div
+      className={twMerge(
+        'flex flex-col gap-3 items-center justify-center text-gray-900 min-h-[calc(100dvh-140px)] bg-white rounded-b-md rounded-r-md border border-gray-200',
+        mode === 'light' && 'text-white bg-secondary  border-secondary min-h-[calc(100dvh-220px)]',
+      )}
+    >
+      <CircleAlert className={twMerge('text-gray-600 min-x-5', mode === 'light' && 'text-white')} />
+      {label}가 없습니다.
     </div>
   )
 }

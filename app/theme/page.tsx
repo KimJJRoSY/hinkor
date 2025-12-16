@@ -17,7 +17,7 @@ export default async function ThemePage({ searchParams }: { searchParams: { id?:
   return (
     <div
       className={twMerge(
-        'flex flex-col gap-3 p-3 bg-secondary rounded-b-md rounded-r-md',
+        'flex flex-col gap-2 p-3 bg-secondary rounded-b-md rounded-r-md',
         isParams && 'bg-white border border-gray-200',
       )}
     >

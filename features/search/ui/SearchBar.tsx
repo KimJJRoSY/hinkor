@@ -1,16 +1,14 @@
-import { RefObject } from 'react'
-
 interface Props {
-  inputRef: RefObject<HTMLInputElement | null>
+  value: string
   onChange: (value: string) => void
 }
 
-export default function SearchBar({ inputRef, onChange }: Props) {
+export default function SearchBar({ value, onChange }: Props) {
   return (
     <input
-      ref={inputRef}
+      value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-white p-2 rounded border border-gray-300 outline-none focus:border-primary focus:ring-primary focus:ring-2"
+      className="bg-white w-full p-2 rounded-md border border-gray-300 outline-none focus:border-primary focus:ring-primary focus:ring-2"
       type="text"
       placeholder="검색어를 입력해 주세요"
     />
