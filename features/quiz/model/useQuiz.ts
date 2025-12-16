@@ -1,7 +1,7 @@
 'use client'
 
 import { Word } from '@/entities/word'
-import { useToast } from '@/shared/utils'
+import { useThrottle, useToast } from '@/shared/utils'
 import { useState, useMemo } from 'react'
 interface Props {
   data: Word[]
@@ -12,6 +12,7 @@ export function useQuiz({ data }: Props) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [wrongList, setWrongList] = useState<number[]>([])
   const { success, warn } = useToast()
+
   const shuffled = useMemo(() => [...data].sort(() => Math.random() - 0.5), [data])
   const isFinished = currentIndex === data.length
 
@@ -36,7 +37,7 @@ export function useQuiz({ data }: Props) {
     })
   }, [data])
 
-  const handleQuiz = (option: string) => {
+  const handleQuiz = useThrottle((option: string) => {
     setSelectedOption(option)
 
     if (option === quizList[currentIndex].answer) {
@@ -51,7 +52,7 @@ export function useQuiz({ data }: Props) {
         return [...set]
       })
     }
-  }
+  }, 500)
 
   return {
     quizList,

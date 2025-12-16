@@ -12,7 +12,7 @@ export default function ToastItem({ id, message, type }: Props) {
   const removeToast = useToastStore((s) => s.removeToast)
 
   useEffect(() => {
-    const timer = setTimeout(() => removeToast(id), 3000)
+    const timer = setTimeout(() => removeToast(id), 2000)
     return () => clearTimeout(timer)
   }, [])
   return (
