@@ -38,16 +38,25 @@ function ThemeCategoryList({ data }: Props) {
   }, [debouncedKeyword])
 
   return (
-    <>
-      <SearchBar inputRef={inputRef} onChange={handleChange} />
-      {filteredData &&
-        filteredData.map((item) => (
-          <CategoryButton label={item.theme} id={item.theme} key={item.id} />
-        ))}
-      {filteredData.length === 0 && (
-        <div className="flex justify-center min-h-[70vh] text-white ">검색 결과가 없습니다</div>
-      )}
-    </>
+    <div className="flex flex-col min-h-[calc(100dvh-160px)]">
+      <div className="sticky top-18 z-40 bg-secondary h-16 flex items-center">
+        <SearchBar inputRef={inputRef} onChange={handleChange} />
+      </div>
+
+      <div>
+        {filteredData &&
+          filteredData.map((item) => (
+            <div className="mb-3" key={item.id}>
+              <CategoryButton label={item.theme} id={item.theme} />
+            </div>
+          ))}
+        {filteredData.length === 0 && (
+          <div className="flex-1 flex items-center justify-center text-white ">
+            검색 결과가 없습니다
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
 export default ThemeCategoryList
