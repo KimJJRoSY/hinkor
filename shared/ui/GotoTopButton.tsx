@@ -1,25 +1,10 @@
 'use client'
-
 import { ChevronUp } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useGotoTop } from '../utils'
 
 function GotoTopButton() {
-  const [visible, setVisible] = useState(false)
+  const { handleClick, visible } = useGotoTop()
 
-  useEffect(() => {
-    const onScroll = () => {
-      setVisible(window.scrollY > 300)
-    }
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const handleClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
   if (!visible) return null
 
   return (
