@@ -1,41 +1,15 @@
 'use client'
 import { ThemeCategory } from '@/entities/word'
 import { CategoryButton } from '@/features/category'
-import { SearchBar } from '@/features/search'
+import { SearchBar, useSearch } from '@/features/search'
 import { EmptyData } from '@/shared/ui'
-import { useDebounce } from '@/shared/utils'
-import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   data: ThemeCategory
 }
 
 function ThemeCategoryList({ data }: Props) {
-  const [keyword, setKeyword] = useState('')
-  const debouncedKeyword = useDebounce(keyword, 300)
-  const [filteredData, setFilteredData] = useState(data)
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  const onInputChange = (value: string) => {
-    setKeyword(value)
-  }
-
-  const applyFilter = (text: string) => {
-    const value = text.trim()
-
-    if (value === '') {
-      setFilteredData(data)
-      return
-    }
-
-    const filtered = data.filter((item) => item.theme.startsWith(value))
-
-    setFilteredData(filtered)
-  }
-
-  useEffect(() => {
-    applyFilter(debouncedKeyword)
-  }, [debouncedKeyword])
+  const { inputRef, filteredData, onInputChange } = useSearch({ data })
 
   return (
     <div className="flex flex-col ">
@@ -43,7 +17,7 @@ function ThemeCategoryList({ data }: Props) {
         <SearchBar inputRef={inputRef} onChange={onInputChange} />
       </div>
 
-      <div>
+      <div className="min-h-[calc(100dvh-230px)]">
         {filteredData &&
           filteredData.map((item) => (
             <div className="mb-3" key={item.id}>
