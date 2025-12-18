@@ -54,6 +54,12 @@ export function useQuiz({ data }: Props) {
     }
   }, 500)
 
+  const resetQuiz = () => {
+    setCurrentIndex(0)
+    setSelectedOption(null)
+    setWrongList([])
+  }
+
   return {
     quizList,
     shuffled,
@@ -61,6 +67,7 @@ export function useQuiz({ data }: Props) {
     selectedOption,
     currentIndex,
     isFinished,
+    resetQuiz,
     handleQuiz,
   }
 }
