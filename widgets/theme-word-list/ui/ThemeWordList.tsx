@@ -3,12 +3,13 @@
 import { Word } from '@/entities/word'
 import { supabase } from '@/shared/api/supabase/client'
 import { useCallback, useEffect, useState } from 'react'
-import { BookOpenCheck, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { MoveToButton } from '@/shared/ui'
 import { WordItem } from '@/features/word-list'
 import { useToast } from '@/shared/utils'
 import { HideWordButton, useHideWordsMeaning } from '@/features/hide-word'
+import { GotoQuizButton, useGotoQuiz } from '@/features/go-to-quiz'
 
 interface Props {
   params: string
@@ -18,7 +19,7 @@ function ThemeWordList({ params }: Props) {
   const [wordList, setData] = useState<Word[]>()
   const [opposition, setOpposition] = useState<string>()
   const { isHidden, setIsHidden, handleHideMeaning } = useHideWordsMeaning()
-
+  const gotoQuiz = useGotoQuiz({ params })
   const { error } = useToast()
 
   const getWordList = useCallback(async () => {
@@ -33,10 +34,6 @@ function ThemeWordList({ params }: Props) {
     router.push(`/theme?id=${opposition}`)
   }
 
-  const gotoQuiz = () => {
-    router.push(`/quiz?label=theme&id=${params}`)
-  }
-
   useEffect(() => {
     getWordList()
     setIsHidden(false)
@@ -47,9 +44,7 @@ function ThemeWordList({ params }: Props) {
       <div className="flex justify-between">
         <HideWordButton isHidden={isHidden} handleHideMeaning={handleHideMeaning} />
         <MoveToButton label="반의어 확인" icon={Check} onClick={gotoCheckOpposition} />
-        {wordList && wordList.length > 3 && (
-          <MoveToButton label="퀴즈" onClick={gotoQuiz} icon={BookOpenCheck} />
-        )}
+        {wordList && wordList.length > 3 && <GotoQuizButton gotoQuiz={gotoQuiz} />}
       </div>
       {wordList &&
         wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
