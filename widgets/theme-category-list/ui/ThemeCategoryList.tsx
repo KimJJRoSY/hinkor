@@ -13,7 +13,7 @@ function ThemeCategoryList({ data }: Props) {
 
   return (
     <div className="flex flex-col ">
-      <div className="sticky top-18 z-40 bg-secondary h-16 flex items-center">
+      <div className="sticky top-18 z-40 y py-3 flex items-center">
         <SearchBar value={keyword} onChange={onInputChange} />
       </div>
 
