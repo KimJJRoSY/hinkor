@@ -15,13 +15,13 @@ export default function DayList({ params, wordList }: Props) {
   const gotoQuiz = useGotoQuiz({ params })
 
   return (
-    <>
-      <div className="flex justify-between">
+    <div className="flex flex-col ">
+      <div className="sticky top-18 z-40 y py-2 flex  justify-between bg-white">
         <HideWordButton isHidden={isHidden} handleHideMeaning={handleHideMeaning} />
         <GotoQuizButton gotoQuiz={gotoQuiz} />
       </div>
       {wordList &&
         wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
-    </>
+    </div>
   )
 }
