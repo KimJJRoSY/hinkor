@@ -26,8 +26,8 @@ export default function RootLayout({
             <div className="sticky top-0 bg-white z-50">
               <Suspense fallback={null}>
                 <Header />
+                <NavigationBar />
               </Suspense>
-              <NavigationBar />
             </div>
             {children}
             <GotoTopButton />
