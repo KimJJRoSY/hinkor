@@ -14,7 +14,7 @@ interface Props {
 function ThemeWordList({ params }: Props) {
   const { wordList, getWordList, gotoCheckOpposition } = useSwitchOpposite({ params })
   const { isHidden, setIsHidden, handleHideMeaning } = useHideWordsMeaning()
-  const gotoQuiz = useGotoQuiz({ params })
+  const gotoQuiz = useGotoQuiz({ params, label: 'theme' })
 
   useEffect(() => {
     getWordList()

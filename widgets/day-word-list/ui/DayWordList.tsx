@@ -12,7 +12,7 @@ interface Props {
 
 export default function DayList({ params, wordList }: Props) {
   const { isHidden, handleHideMeaning } = useHideWordsMeaning()
-  const gotoQuiz = useGotoQuiz({ params })
+  const gotoQuiz = useGotoQuiz({ params, label: 'day' })
 
   return (
     <div className="flex flex-col ">
