@@ -23,7 +23,7 @@ function ThemeCategoryList({ data }: Props) {
             <CategoryButton label={item.theme} id={item.theme} />
           </div>
         ))}
-        {filteredData.length === 0 && <EmptyData label="검색결과" mode="light" />}
+        {filteredData.length === 0 && <EmptyData text="검색결과" mode="light" />}
       </div>
     </div>
   )

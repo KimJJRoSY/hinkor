@@ -1,7 +1,8 @@
-import { createServer } from '@/shared/api'
 import { ThemeWordList } from '@/widgets/theme-word-list'
 import { twMerge } from 'tailwind-merge'
 import ThemeCategoryList from '@/widgets/theme-category-list/ui/ThemeCategoryList'
+import { EmptyData } from '@/shared/ui'
+import { getCategoryList } from '@/entities/category'
 
 export const metadata = {
   title: '테마',
@@ -11,8 +12,16 @@ export const metadata = {
 export default async function ThemePage({ searchParams }: { searchParams: { id?: string } }) {
   const params = await searchParams
   const isParams = params.id ? true : false
-  const supabase = await createServer()
-  const { data } = await supabase.from('theme_list').select('*')
+  const result = await getCategoryList({ label: 'theme_list' })
+
+  if (!result.ok) {
+    switch (result.error) {
+      case 'NOT_FOUND':
+        return <EmptyData text="데이터가 없습니다." mode="dark" />
+      default:
+        return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+    }
+  }
 
   return (
     <div
@@ -21,7 +30,11 @@ export default async function ThemePage({ searchParams }: { searchParams: { id?:
         isParams && 'bg-white border border-gray-200',
       )}
     >
-      {isParams ? <ThemeWordList params={params.id!} /> : data && <ThemeCategoryList data={data} />}
+      {isParams ? (
+        <ThemeWordList params={params.id!} />
+      ) : (
+        result.data && <ThemeCategoryList data={result.data} />
+      )}
     </div>
   )
 }

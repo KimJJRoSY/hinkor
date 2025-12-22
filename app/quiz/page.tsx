@@ -15,7 +15,7 @@ export default async function QuizPage({
   const params = await searchParams
 
   if (!params.id || !params.label) {
-    return <EmptyData label={'데이터'} mode="dark" />
+    return <EmptyData text={'데이터'} mode="dark" />
   }
 
   const data = await getQuizList({ label: params.label, id: params.id })
