@@ -21,7 +21,14 @@ export default function DayList({ params, wordList }: Props) {
         <GotoQuizButton gotoQuiz={gotoQuiz} />
       </div>
       {wordList &&
-        wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
+        wordList.map((word, index) => (
+          <WordItem
+            key={word.id}
+            word={word}
+            isHidden={isHidden}
+            isLast={index + 1 === wordList.length}
+          />
+        ))}
     </div>
   )
 }

@@ -29,7 +29,14 @@ function ThemeWordList({ params }: Props) {
         {wordList && wordList.length > 3 && <GotoQuizButton gotoQuiz={gotoQuiz} />}
       </div>
       {wordList &&
-        wordList.map((word) => <WordItem key={word.id} word={word} isHidden={isHidden} />)}
+        wordList.map((word, index) => (
+          <WordItem
+            key={word.id}
+            word={word}
+            isHidden={isHidden}
+            isLast={index + 1 === wordList.length}
+          />
+        ))}
     </div>
   )
 }
