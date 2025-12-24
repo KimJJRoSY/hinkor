@@ -1,6 +1,6 @@
-import getQuizList from '@/entities/quiz/api/getQuizList'
+import getServerQuizList from '@/entities/quiz/api/getServerQuizList'
 import { EmptyData } from '@/shared/ui'
-import QuizContainer from '@/widgets/quiz-container/ui/QuizContainer'
+import { QuizContainer } from '@/widgets/quiz-container'
 
 export const metadata = {
   title: '퀴즈',
@@ -15,10 +15,18 @@ export default async function QuizPage({
   const params = await searchParams
 
   if (!params.id || !params.label) {
-    return <EmptyData text={'데이터'} mode="dark" />
+    return <EmptyData text="데이터가 없습니다." mode="dark" />
   }
 
-  const data = await getQuizList({ label: params.label, id: params.id })
+  const result = await getServerQuizList({ label: params.label, id: params.id })
+  if (!result.ok) {
+    switch (result.error) {
+      case 'NOT_FOUND':
+        return <EmptyData text="데이터가 없습니다." mode="dark" />
+      default:
+        return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+    }
+  }
 
-  return <QuizContainer data={data.words} />
+  return <QuizContainer data={result.data.words} />
 }

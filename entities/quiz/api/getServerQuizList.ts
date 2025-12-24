@@ -4,15 +4,21 @@ interface Props {
   id: string
 }
 
-export default async function getQuizList({ label, id }: Props) {
+export default async function getServerQuizList({ label, id }: Props) {
   const supabase = await createSupabaseServer()
 
-  const { data: base } =
+  const { data: base, error } =
     label === 'day'
       ? await supabase.from('day_list').select('*').eq('id', id)
       : await supabase.from('theme_list').select('*').eq('theme', id)
 
-  if (!base || base.length === 0) return { words: [] }
+  if (error) {
+    return { ok: false, error: 'UNKNOWN' }
+  }
+
+  if (!base) {
+    return { ok: false, error: 'NOT_FOUND' }
+  }
 
   const current = base[0]
 
@@ -28,8 +34,8 @@ export default async function getQuizList({ label, id }: Props) {
       words: [...(current.words ?? []), ...(opposition?.words ?? [])],
     }
 
-    return merged
+    return { ok: true, data: merged }
   }
 
-  return current
+  return { ok: true, data: current }
 }
