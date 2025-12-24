@@ -1,11 +1,11 @@
-import { createServer } from '@/shared/api'
+import { createSupabaseServer } from '@/shared/api'
 interface Props {
   label: string
   id: string
 }
 
 export default async function getQuizList({ label, id }: Props) {
-  const supabase = await createServer()
+  const supabase = await createSupabaseServer()
 
   const { data: base } =
     label === 'day'

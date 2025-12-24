@@ -1,10 +1,9 @@
-import { getCategoryList } from '@/entities/category'
+import { getServerCategoryList } from '@/entities/category/api/getServerCategoryList'
 import { CategoryButton } from '@/features/category'
-
 import { EmptyData } from '@/shared/ui'
 
 export default async function DayPage() {
-  const result = await getCategoryList({ label: 'day_list' })
+  const result = await getServerCategoryList({ label: 'day_list' })
 
   if (!result.ok) {
     switch (result.error) {

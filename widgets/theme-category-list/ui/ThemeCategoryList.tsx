@@ -1,15 +1,23 @@
 'use client'
+import { getClientCategoryList } from '@/entities/category/api/getClientCategoryList'
 import { ThemeCategory } from '@/entities/word'
 import { CategoryButton } from '@/features/category'
 import { SearchBar, useSearch } from '@/features/search'
 import { EmptyData } from '@/shared/ui'
+import { useQuery } from '@tanstack/react-query'
 
-interface Props {
-  data: ThemeCategory
-}
+function ThemeCategoryList() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['category', 'theme_list'],
+    queryFn: () => getClientCategoryList({ label: 'theme_list' }),
+  })
+  const { keyword, filteredData, onInputChange } = useSearch({
+    data: (data?.ok ? data.data : []) as ThemeCategory,
+  })
 
-function ThemeCategoryList({ data }: Props) {
-  const { keyword, filteredData, onInputChange } = useSearch({ data })
+  if (isLoading) return null
+  if (isError) return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+  if (!data?.ok) return <EmptyData text="데이터가 없습니다." mode="dark" />
 
   return (
     <div className="flex flex-col ">
@@ -23,7 +31,7 @@ function ThemeCategoryList({ data }: Props) {
             <CategoryButton label={item.theme} id={item.theme} />
           </div>
         ))}
-        {filteredData.length === 0 && <EmptyData text="검색결과" mode="light" />}
+        {filteredData.length === 0 && <EmptyData text="검색결과가 없습니다" mode="light" />}
       </div>
     </div>
   )

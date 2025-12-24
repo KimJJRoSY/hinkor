@@ -1,11 +1,10 @@
-import { createServer } from '@/shared/api'
+import { supabase } from '@/shared/api/supabase/client'
 
 interface Props {
   label: string
 }
 
-export async function getCategoryList({ label }: Props) {
-  const supabase = await createServer()
+export async function getClientCategoryList({ label }: Props) {
   const { data, error } = await supabase.from(label).select('*')
 
   if (error) {
