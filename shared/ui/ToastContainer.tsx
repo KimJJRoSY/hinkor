@@ -3,7 +3,7 @@
 import { useToastStore } from '../store/toast-store'
 import ToastItem from './ToastItem'
 
-export function ToastContainer() {
+export default function ToastContainer() {
   const toasts = useToastStore((s) => s.toasts)
 
   return (
