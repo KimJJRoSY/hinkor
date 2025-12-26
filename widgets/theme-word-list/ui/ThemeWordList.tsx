@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import { Check } from 'lucide-react'
-import { MoveToButton } from '@/shared/ui'
+import { EmptyData, MoveToButton } from '@/shared/ui'
 import { WordItem } from '@/features/word-list'
 import { HideWordButton, useHideWordsMeaning } from '@/features/hide-word'
 import { GotoQuizButton, useGotoQuiz } from '@/features/go-to-quiz'
@@ -12,14 +11,13 @@ interface Props {
   params: string
 }
 function ThemeWordList({ params }: Props) {
-  const { wordList, getWordList, gotoCheckOpposition } = useSwitchOpposite({ params })
-  const { isHidden, setIsHidden, handleHideMeaning } = useHideWordsMeaning()
+  const { wordList, isLoading, isError, gotoCheckOpposition } = useSwitchOpposite({ params })
+  const { isHidden, handleHideMeaning } = useHideWordsMeaning()
   const gotoQuiz = useGotoQuiz({ params, label: 'theme' })
 
-  useEffect(() => {
-    getWordList()
-    setIsHidden(false)
-  }, [params])
+  if (isLoading) return null
+  if (isError) return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+  if (!wordList) return <EmptyData text="데이터가 없습니다." mode="dark" />
 
   return (
     <div className="flex flex-col min-h-[calc(100dvh-160px)]">

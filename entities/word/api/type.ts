@@ -13,10 +13,11 @@ export interface Word {
 
 export type ThemeWord = Omit<Word, 'group_id' | 'value' | 'category'>
 
-export type ThemeCategory = {
+export interface ThemeItem {
   id: number
   opposition: string
   theme: string
   value: string
   words: Word[]
-}[]
+}
+export type ThemeCategory = ThemeItem[]
