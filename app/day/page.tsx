@@ -1,6 +1,7 @@
 import { DayWordList } from '@/widgets/day-word-list'
 import { EmptyData } from '@/shared/ui'
-import getWordList from '@/entities/word/api/getWordList'
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
+import { getServerWordList } from '@/entities/word/api/server'
 
 export const metadata = {
   title: '날짜',
@@ -9,25 +10,21 @@ export const metadata = {
 
 export default async function DayPage({ searchParams }: { searchParams: { id?: string } }) {
   const params = await searchParams
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: ['wordList', `day_list_${params.id}`],
+    queryFn: () => getServerWordList({ params: params.id, label: 'day_list', field: 'id' }),
+  })
 
   if (!params.id) {
     return <EmptyData text={'데이터'} mode="dark" />
   }
 
-  const result = await getWordList({ params: params.id, label: 'day_list' })
-
-  if (!result.ok) {
-    switch (result.error) {
-      case 'NOT_FOUND':
-        return <EmptyData text="데이터가 없습니다." mode="dark" />
-      default:
-        return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
-    }
-  }
-
   return (
     <div className="flex flex-col gap-3 p-3 bg-white rounded-b-md rounded-r-md border border-gray-200">
-      {result.data && <DayWordList wordList={result.data} params={params.id} />}
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <DayWordList params={params.id} />
+      </HydrationBoundary>
     </div>
   )
 }

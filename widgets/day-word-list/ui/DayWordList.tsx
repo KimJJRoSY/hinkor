@@ -1,18 +1,27 @@
 'use client'
 
-import { Word } from '@/entities/word'
+import { getClientDayWordList } from '@/entities/word/api/client'
 import { GotoQuizButton, useGotoQuiz } from '@/features/go-to-quiz'
 import { HideWordButton, useHideWordsMeaning } from '@/features/hide-word'
 import { WordItem } from '@/features/word-list'
+import { EmptyData } from '@/shared/ui'
+import { useQuery } from '@tanstack/react-query'
 
 interface Props {
   params: string
-  wordList: Word[]
 }
 
-export default function DayList({ params, wordList }: Props) {
+export default function DayList({ params }: Props) {
   const { isHidden, handleHideMeaning } = useHideWordsMeaning()
   const gotoQuiz = useGotoQuiz({ params, label: 'day' })
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['wordList', `day_list_${params}`],
+    queryFn: () => getClientDayWordList({ params }),
+  })
+  if (isLoading) return null
+  if (isError) return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+  if (!data?.ok) return <EmptyData text="데이터가 없습니다." mode="dark" />
 
   return (
     <div className="flex flex-col ">
@@ -20,13 +29,13 @@ export default function DayList({ params, wordList }: Props) {
         <HideWordButton isHidden={isHidden} handleHideMeaning={handleHideMeaning} />
         <GotoQuizButton gotoQuiz={gotoQuiz} />
       </div>
-      {wordList &&
-        wordList.map((word, index) => (
+      {data.data &&
+        data.data.map((word, index) => (
           <WordItem
             key={word.id}
             word={word}
             isHidden={isHidden}
-            isLast={index + 1 === wordList.length}
+            isLast={index + 1 === data.data.length}
           />
         ))}
     </div>
