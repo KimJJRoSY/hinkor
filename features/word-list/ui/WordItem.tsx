@@ -40,8 +40,11 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
           <h3 className="text-base">{word.한국어}</h3>
         )}
       </div>
-      <button onClick={() => onSpeak(word.힌디어)}>
-        <Speech className="w-4 text-gray-400 cursor-pointer hover:translate-y-0.5" />
+      <button
+        onClick={() => onSpeak(word.힌디어)}
+        className="cursor-pointer hover:translate-y-0.5 p-2 rounded hover:bg-gray-200 active:bg-gray-200 "
+      >
+        <Speech className="w-4 text-gray-400" />
       </button>
     </div>
   )
