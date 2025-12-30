@@ -27,7 +27,10 @@ export default function ToastItem({ id, message, type }: Props) {
     >
       <span>{message}</span>
 
-      <button onClick={() => removeToast(id)} className="ml-3 opacity-80 hover:opacity-100">
+      <button
+        onClick={() => removeToast(id)}
+        className="ml-3 opacity-80 hover:opacity-100 active:opacity-100"
+      >
         <X size={16} />
       </button>
     </div>

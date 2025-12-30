@@ -10,7 +10,7 @@ function GotoTopButton() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 right-6 rounded-full bg-gray-300 p-2 text-center shadow-2xl cursor-pointer hover:bg-accent"
+      className="fixed bottom-6 right-6 rounded-full bg-gray-300 p-2 text-center shadow-2xl cursor-pointer hover:bg-accent active:bg-accent"
     >
       <ChevronUp />
     </button>
