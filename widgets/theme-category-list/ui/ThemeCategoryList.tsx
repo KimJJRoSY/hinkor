@@ -21,7 +21,7 @@ function ThemeCategoryList() {
 
   return (
     <div className="flex flex-col ">
-      <div className="sticky top-18 z-40 y py-3 flex items-center bg-white dark:bg-gray-800 ">
+      <div className="sticky top-18 z-40 y py-3 flex items-center bg-secondary dark:bg-gray-800 ">
         <SearchBar value={keyword} onChange={onInputChange} />
       </div>
 
