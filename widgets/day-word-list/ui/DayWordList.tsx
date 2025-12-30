@@ -24,8 +24,8 @@ export default function DayList({ params }: Props) {
   if (!data?.ok) return <EmptyData text="데이터가 없습니다." mode="dark" />
 
   return (
-    <div className="flex flex-col ">
-      <div className="sticky top-18 z-40 y py-2 flex  justify-between bg-white">
+    <div className="flex flex-col">
+      <div className="sticky top-18 z-40 y py-2 flex justify-between bg-white dark:bg-gray-800">
         <HideWordButton isHidden={isHidden} handleHideMeaning={handleHideMeaning} />
         <GotoQuizButton gotoQuiz={gotoQuiz} />
       </div>

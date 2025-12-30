@@ -21,7 +21,7 @@ export default async function DayPage({ searchParams }: { searchParams: { id?: s
   }
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-white rounded-b-md rounded-r-md border border-gray-200">
+    <div className="flex flex-col gap-3 p-3 bg-white rounded-b-md rounded-r-md border border-gray-200 dark:bg-gray-800 dark:border-none">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <DayWordList params={params.id} />
       </HydrationBoundary>

@@ -21,9 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="flex justify-center">
-          <div className="relative max-w-3xl w-full bg-white p-5 min-h-screen">
+          <div className="relative max-w-3xl w-full bg-white p-5 min-h-screen dark:bg-gray-900">
             <ToastContainer />
-            <div className="sticky top-0 bg-white z-50">
+            <div className="sticky top-0 z-50">
               <Suspense fallback={null}>
                 <Header />
                 <NavigationBar />

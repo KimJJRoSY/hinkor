@@ -25,8 +25,8 @@ export default function NavigationButton({ label, isActive }: Props) {
       <Link href={label === 'DAY' ? '/' : 'theme'} prefetch>
         <button
           className={twMerge(
-            'bg-gray-200 rounded-t-md px-4 py-1 text-base font-bold hover:bg-gray-400 hover:cursor-pointer active:bg-gray-400 active:cursor-pointer',
-            isActive && 'text-white bg-primary ',
+            'bg-gray-200 rounded-t-md px-4 py-1 text-base font-bold hover:bg-gray-400 hover:cursor-pointer active:bg-gray-400 active:cursor-pointer text-gray-950 dark:bg-gray-400',
+            isActive && 'text-white bg-primary dark:bg-secondary',
           )}
         >
           {getLabel(label)}

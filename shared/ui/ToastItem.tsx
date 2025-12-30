@@ -18,7 +18,7 @@ export default function ToastItem({ id, message, type }: Props) {
   return (
     <div
       className={twMerge(
-        'flex items-center justify-between min-w-50 px-4 py-2 rounded-lg shadow-md text-sm animate-slide-up',
+        'flex items-center justify-between min-w-50 px-4 py-2 rounded-lg shadow-md text-sm animate-slide-up text-gray-950',
         type === 'success' && 'bg-green-200',
         type === 'warn' && 'bg-orange-200 ',
         type === 'error' && 'bg-red-200 ',

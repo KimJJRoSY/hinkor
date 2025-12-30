@@ -21,7 +21,7 @@ function ThemeWordList({ params }: Props) {
 
   return (
     <div className="flex flex-col min-h-[calc(100dvh-160px)]">
-      <div className="sticky top-18 z-40 y py-2 flex  justify-between bg-white">
+      <div className="sticky top-18 z-40 y py-2 flex  justify-between bg-white dark:bg-gray-800 ">
         <HideWordButton isHidden={isHidden} handleHideMeaning={handleHideMeaning} />
         <MoveToButton label="반의어 확인" icon={Check} onClick={gotoCheckOpposition} />
         {wordList && wordList.length > 3 && <GotoQuizButton gotoQuiz={gotoQuiz} />}

@@ -11,18 +11,18 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex gap-1 items-center justify-center mb-2 relative max-w-3xl mx-auto">
+      <div className="flex gap-1 items-center justify-center mb-2 relative max-w-3xl mx-auto bg-white dark:bg-gray-900">
         {isDetailPage && (
           <button
-            className="flex items-center text-gray-800 absolute left-0"
+            className="flex items-center text-gray-800 absolute left-0 dark:text-gray-100"
             onClick={() => router.back()}
           >
-            <ChevronLeft className="w-5" /> <p className="text-sm">뒤로</p>
+            <ChevronLeft className="w-5" /> <p className="text-sm ">뒤로</p>
           </button>
         )}
         <div className="flex gap-1 text-2xl font-bold font-hinko">
           <h1 className="text-accent">HIN</h1>
-          <h1 className="text-primary">KOR</h1>
+          <h1 className="text-primary dark:text-blue-500">KOR</h1>
         </div>
       </div>
     </>

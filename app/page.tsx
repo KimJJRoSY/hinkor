@@ -15,7 +15,7 @@ export default async function DayPage() {
   }
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-secondary rounded-b-md rounded-r-md">
+    <div className="flex flex-col gap-3 p-3 bg-secondary rounded-b-md rounded-r-md dark:bg-gray-800 dark:border dark:border-gray-500 ">
       {result.data &&
         result.data.map((item) => (
           <CategoryButton label={`day${item.id}`} key={item.id} id={item.id} />
