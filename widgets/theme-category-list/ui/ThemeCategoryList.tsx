@@ -31,7 +31,7 @@ function ThemeCategoryList() {
             <CategoryButton label={item.theme} id={item.theme} />
           </div>
         ))}
-        {filteredData.length === 0 && <EmptyData text="검색결과가 없습니다" mode="light" />}
+        {filteredData.length === 0 && <EmptyData text="검색결과가 없습니다" mode="dark" />}
       </div>
     </div>
   )

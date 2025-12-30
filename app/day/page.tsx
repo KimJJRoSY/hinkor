@@ -17,7 +17,7 @@ export default async function DayPage({ searchParams }: { searchParams: { id?: s
   })
 
   if (!params.id) {
-    return <EmptyData text={'데이터'} mode="dark" />
+    return <EmptyData text={'데이터'} mode="light" />
   }
 
   return (

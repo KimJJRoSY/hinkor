@@ -24,7 +24,7 @@ export default function QuizContainer({ data }: Props) {
   const USER_CURRENT_INDEX = currentIndex + 1
 
   return (
-    <div className="flex flex-col py-5 gap-5 items-center bg-secondary rounded-b-md rounded-r-md min-h-[calc(100dvh-140px)] w-full dark:bg-gray-700">
+    <>
       {isFinished ? (
         <>
           <ProgressBar current={USER_SCORE} total={TOTAL} value={(USER_SCORE / TOTAL) * 100} />
@@ -57,6 +57,6 @@ export default function QuizContainer({ data }: Props) {
           </div>
         </>
       )}
-    </div>
+    </>
   )
 }

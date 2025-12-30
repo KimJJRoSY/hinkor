@@ -16,8 +16,8 @@ function ThemeWordList({ params }: Props) {
   const gotoQuiz = useGotoQuiz({ params, label: 'theme' })
 
   if (isLoading) return null
-  if (isError) return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
-  if (!wordList) return <EmptyData text="데이터가 없습니다." mode="dark" />
+  if (isError) return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="light" />
+  if (!wordList) return <EmptyData text="데이터가 없습니다." mode="light" />
 
   return (
     <div className="flex flex-col min-h-[calc(100dvh-160px)]">
