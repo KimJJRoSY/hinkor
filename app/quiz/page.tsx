@@ -28,5 +28,9 @@ export default async function QuizPage({
     }
   }
 
-  return <QuizContainer data={result.data.words} />
+  return (
+    <div className="flex flex-col py-5 gap-5 items-center bg-secondary rounded-b-md rounded-r-md min-h-[calc(100dvh-140px)] w-full dark:bg-gray-700">
+      <QuizContainer data={result.data.words} />
+    </div>
+  )
 }

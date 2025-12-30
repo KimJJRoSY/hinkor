@@ -16,13 +16,13 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
   return (
     <div
       className={twMerge(
-        'bg-white p-4 border-b border-gray-200 flex gap-2 items-start rounded',
+        'p-4 border-b border-gray-200 flex gap-2 items-start rounded dark:rounded-b-none',
         isLast && 'border-none',
       )}
     >
       <span
         className={twMerge(
-          'flex items-center justify-center rounded-md w-5 h-5 text-xs mt-1.5',
+          'flex items-center justify-center rounded-md w-5 h-5 text-xs mt-1.5 text-gray-950',
           getBackgroundColors(word.품사),
         )}
       >
@@ -35,7 +35,7 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
         </div>
 
         {isHidden ? (
-          <div className="bg-black w-20 ">숨김</div>
+          <div className="bg-black w-20 text-black">숨김</div>
         ) : (
           <h3 className="text-base">{word.한국어}</h3>
         )}

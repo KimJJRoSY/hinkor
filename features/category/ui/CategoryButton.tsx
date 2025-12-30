@@ -24,7 +24,7 @@ export default function CategoryButton({ label, id }: Props) {
   return (
     <button
       className="flex w-full bg-white rounded-md p-2 justify-between items-center border border-gray-100 text-base cursor-pointer 
-      hover:bg-gray-300 hover:translate-y-0.5 active:bg-gray-300 active:translate-y-0.5 "
+      hover:bg-gray-300 hover:translate-y-0.5 active:bg-gray-300 active:translate-y-0.5 dark:bg-gray-500 dark:border-gray-400 dark:hover:bg-gray-700 dark:active:bg-gray-700"
       onClick={goToDetailPage}
     >
       {label}

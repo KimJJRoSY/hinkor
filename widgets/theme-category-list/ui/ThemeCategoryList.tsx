@@ -21,7 +21,7 @@ function ThemeCategoryList() {
 
   return (
     <div className="flex flex-col ">
-      <div className="sticky top-18 z-40 y py-3 flex items-center">
+      <div className="sticky top-18 z-40 y py-3 flex items-center bg-white dark:bg-gray-800 ">
         <SearchBar value={keyword} onChange={onInputChange} />
       </div>
 
@@ -31,7 +31,7 @@ function ThemeCategoryList() {
             <CategoryButton label={item.theme} id={item.theme} />
           </div>
         ))}
-        {filteredData.length === 0 && <EmptyData text="검색결과가 없습니다" mode="light" />}
+        {filteredData.length === 0 && <EmptyData text="검색결과가 없습니다" mode="dark" />}
       </div>
     </div>
   )
