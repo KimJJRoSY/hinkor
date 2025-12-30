@@ -1,8 +1,8 @@
 'use client'
 import { Word } from '@/entities/word'
 import { AnswerItem, useQuiz, QuizItem, ProgressBar } from '@/features/quiz'
-import { WordItem } from '@/features/word-list'
 import { MoveToButton } from '@/shared/ui'
+import { WordItem } from '@/features/word-list'
 import { BookOpenCheck } from 'lucide-react'
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 export default function QuizContainer({ data }: Props) {
   const {
     quizList,
-    shuffled,
+    shuffledList,
     wrongList,
     selectedOption,
     currentIndex,
@@ -19,49 +19,44 @@ export default function QuizContainer({ data }: Props) {
     resetQuiz,
     handleQuiz,
   } = useQuiz({ data })
-  return (
-    <>
-      <div className="flex flex-col py-5 gap-5 items-center bg-secondary rounded-b-md rounded-r-md min-h-[calc(100dvh-140px)] w-full">
-        {isFinished ? (
-          <>
-            <div className="px-4 w-full">
-              <p className="text-white text-base p-2">
-                {quizList.length - wrongList.length} / {quizList.length}
-              </p>
-              <ProgressBar value={((quizList.length - wrongList.length) / quizList.length) * 100} />
-            </div>
+  const USER_SCORE = quizList.length - wrongList.length
+  const TOTAL = quizList.length
+  const USER_CURRENT_INDEX = currentIndex + 1
 
-            <MoveToButton label="다시 퀴즈" onClick={resetQuiz} icon={BookOpenCheck} />
-            <div className="flex flex-1 flex-col gap-3 min-w-3/5 w-full px-3">
-              {wrongList.map((item) => (
-                <WordItem key={item} word={shuffled[item]} isHidden={false} />
+  return (
+    <div className="flex flex-col py-5 gap-5 items-center bg-secondary rounded-b-md rounded-r-md min-h-[calc(100dvh-140px)] w-full">
+      {isFinished ? (
+        <>
+          <ProgressBar current={USER_SCORE} total={TOTAL} value={(USER_SCORE / TOTAL) * 100} />
+          <MoveToButton label="다시 퀴즈" onClick={resetQuiz} icon={BookOpenCheck} />
+          <div className="flex flex-1 flex-col gap-3 min-w-3/5 w-full px-3">
+            {wrongList.map((item) => (
+              <WordItem key={item} word={shuffledList[item]} isHidden={false} isLast={false} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <ProgressBar
+            current={USER_CURRENT_INDEX}
+            total={TOTAL}
+            value={(USER_CURRENT_INDEX / TOTAL) * 100}
+          />
+          <div className="flex flex-1 flex-col items-center justify-center gap-10">
+            <QuizItem question={quizList[currentIndex].question} />
+            <div className="flex flex-col gap-6 items-center">
+              {quizList[currentIndex].chooseList.map((i, index) => (
+                <AnswerItem
+                  option={i.option}
+                  onChoose={handleQuiz}
+                  key={index}
+                  isSelected={selectedOption === i.option}
+                />
               ))}
             </div>
-          </>
-        ) : (
-          <>
-            <div className="px-4  w-full">
-              <p className="text-white text-base">
-                {currentIndex + 1}/{quizList.length}
-              </p>
-              <ProgressBar value={(currentIndex / quizList.length) * 100} />
-            </div>
-            <div className="flex flex-1 flex-col items-center justify-center gap-10">
-              <QuizItem question={quizList[currentIndex].question} />
-              <div className="flex flex-col gap-6 items-center">
-                {quizList[currentIndex].chooseList.map((i, index) => (
-                  <AnswerItem
-                    option={i.option}
-                    onChoose={handleQuiz}
-                    key={index}
-                    isSelected={selectedOption === i.option}
-                  />
-                ))}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+          </div>
+        </>
+      )}
+    </div>
   )
 }

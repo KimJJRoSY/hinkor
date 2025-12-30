@@ -1,8 +1,7 @@
-import { Word } from '@/entities/word'
-import { supabase } from '@/shared/api/supabase/client'
+import { getClientThemeWordList } from '@/entities/word/api/client'
 import { useToast } from '@/shared/utils'
+import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
 
 interface Props {
   params: string
@@ -10,25 +9,26 @@ interface Props {
 
 export function useSwitchOpposite({ params }: Props) {
   const router = useRouter()
-  const [wordList, setData] = useState<Word[]>()
-  const [opposition, setOpposition] = useState<string>()
   const { error } = useToast()
 
-  const getWordList = useCallback(async () => {
-    const { data } = await supabase.from('theme_list').select('*').eq('theme', params)
-    if (!data) return error('테마 단어 데이터가 없습니다.')
-    setData(data[0].words)
-    setOpposition(data[0].opposition)
-  }, [params, error])
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['wordList', `theme_list_${params}`],
+    queryFn: () => getClientThemeWordList({ params }),
+  })
+
+  const themeData = data?.ok ? data.data : undefined
+  const wordList = themeData?.words
+  const oppositeList = themeData?.opposition
 
   const gotoCheckOpposition = () => {
-    if (!opposition) return error('반의어 데이터가 없습니다.')
-    router.push(`/theme?id=${opposition}`)
+    if (!oppositeList) return error('반의어 데이터가 없습니다.')
+    router.push(`/theme?id=${oppositeList}`)
   }
 
   return {
     wordList,
-    getWordList,
+    isLoading,
+    isError,
     gotoCheckOpposition,
   }
 }

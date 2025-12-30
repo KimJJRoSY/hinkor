@@ -8,12 +8,18 @@ import useWord from '../model/useWord'
 interface Props {
   word: Word | ThemeWord
   isHidden: boolean
+  isLast: boolean
 }
 
-export default function WordItem({ word, isHidden }: Props) {
+export default function WordItem({ word, isHidden, isLast }: Props) {
   const { getBackgroundColors, getPosition, onSpeak } = useWord()
   return (
-    <div className="bg-white p-4 border-b border-gray-200 flex gap-2 items-start rounded">
+    <div
+      className={twMerge(
+        'bg-white p-4 border-b border-gray-200 flex gap-2 items-start rounded',
+        isLast && 'border-none',
+      )}
+    >
       <span
         className={twMerge(
           'flex items-center justify-center rounded-md w-5 h-5 text-xs mt-1.5',

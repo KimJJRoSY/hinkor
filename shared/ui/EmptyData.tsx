@@ -1,11 +1,11 @@
 import { CircleAlert } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 interface Props {
-  label: string
+  text: string
   mode: 'dark' | 'light'
 }
 
-export default function EmptyData({ label, mode }: Props) {
+export default function EmptyData({ text, mode }: Props) {
   return (
     <div
       className={twMerge(
@@ -14,7 +14,7 @@ export default function EmptyData({ label, mode }: Props) {
       )}
     >
       <CircleAlert className={twMerge('text-gray-600 min-x-5', mode === 'light' && 'text-white')} />
-      {label}가 없습니다.
+      {text}
     </div>
   )
 }

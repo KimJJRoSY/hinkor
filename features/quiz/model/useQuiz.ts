@@ -13,13 +13,13 @@ export function useQuiz({ data }: Props) {
   const [wrongList, setWrongList] = useState<number[]>([])
   const { success, warn } = useToast()
 
-  const shuffled = useMemo(() => [...data].sort(() => Math.random() - 0.5), [data])
+  const shuffledList = useMemo(() => [...data].sort(() => Math.random() - 0.5), [data])
   const isFinished = currentIndex === data.length
 
   const quizList = useMemo(() => {
     if (data.length === 0) return []
-    return shuffled.map((item, index) => {
-      const others = shuffled.filter((_, i) => i !== index)
+    return shuffledList.map((item, index) => {
+      const others = shuffledList.filter((_, i) => i !== index)
 
       const wrong = others.map((v) => v.한국어).sort(() => Math.random() - 0.5)
 
@@ -62,7 +62,7 @@ export function useQuiz({ data }: Props) {
 
   return {
     quizList,
-    shuffled,
+    shuffledList,
     wrongList,
     selectedOption,
     currentIndex,

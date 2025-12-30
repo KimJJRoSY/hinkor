@@ -1,2 +1,1 @@
-export { default as QuizItem } from '../../features/quiz/ui/QuizItem'
-export { default as AnswerItem } from '../../features/quiz/ui/AnswerItem'
+export { default as QuizContainer } from './ui/QuizContainer'

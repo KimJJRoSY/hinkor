@@ -1,15 +1,16 @@
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 
 interface Props {
   label: string
   isActive: boolean
-  onClick: (label: string) => void
 }
 
-export default function NavigationButton({ label, isActive, onClick }: Props) {
+export default function NavigationButton({ label, isActive }: Props) {
   const params = useSearchParams()
   const id = params.get('id')
+
   const getLabel = (label: string) => {
     if (label === 'DAY' && id && isActive) {
       return `DAY${id}`
@@ -20,14 +21,17 @@ export default function NavigationButton({ label, isActive, onClick }: Props) {
     }
   }
   return (
-    <button
-      className={twMerge(
-        'bg-gray-200 rounded-t-md px-4 py-1 text-base font-bold hover:bg-gray-400 hover:cursor-pointer',
-        isActive && 'text-white bg-primary ',
-      )}
-      onClick={() => onClick(label)}
-    >
-      {getLabel(label)}
-    </button>
+    <>
+      <Link href={label === 'DAY' ? '/' : 'theme'} prefetch>
+        <button
+          className={twMerge(
+            'bg-gray-200 rounded-t-md px-4 py-1 text-base font-bold hover:bg-gray-400 hover:cursor-pointer',
+            isActive && 'text-white bg-primary ',
+          )}
+        >
+          {getLabel(label)}
+        </button>
+      </Link>
+    </>
   )
 }

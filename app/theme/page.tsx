@@ -1,7 +1,9 @@
-import { createServer } from '@/shared/api'
 import { ThemeWordList } from '@/widgets/theme-word-list'
 import { twMerge } from 'tailwind-merge'
 import ThemeCategoryList from '@/widgets/theme-category-list/ui/ThemeCategoryList'
+import { getServerCategoryList } from '@/entities/category/api/getServerCategoryList'
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
+import { getThemeServerWordList } from '@/entities/word/api/server'
 
 export const metadata = {
   title: '테마',
@@ -11,8 +13,20 @@ export const metadata = {
 export default async function ThemePage({ searchParams }: { searchParams: { id?: string } }) {
   const params = await searchParams
   const isParams = params.id ? true : false
-  const supabase = await createServer()
-  const { data } = await supabase.from('theme_list').select('*')
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['category', 'theme_list'],
+    queryFn: () => getServerCategoryList({ label: 'theme_list' }),
+  })
+
+  if (isParams) {
+    await queryClient.prefetchQuery({
+      queryKey: ['wordList', `theme_list_${params.id}`],
+      queryFn: () =>
+        getThemeServerWordList({ params: params.id, label: 'theme_list', field: 'theme' }),
+    })
+  }
 
   return (
     <div
@@ -21,7 +35,15 @@ export default async function ThemePage({ searchParams }: { searchParams: { id?:
         isParams && 'bg-white border border-gray-200',
       )}
     >
-      {isParams ? <ThemeWordList params={params.id!} /> : data && <ThemeCategoryList data={data} />}
+      {isParams ? (
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ThemeWordList params={params.id!} />
+        </HydrationBoundary>
+      ) : (
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ThemeCategoryList />
+        </HydrationBoundary>
+      )}
     </div>
   )
 }
