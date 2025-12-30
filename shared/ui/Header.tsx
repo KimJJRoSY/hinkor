@@ -20,7 +20,10 @@ export default function Header() {
             <ChevronLeft className="w-5" /> <p className="text-sm ">뒤로</p>
           </button>
         )}
-        <div className="flex gap-1 text-2xl font-bold font-hinko">
+        <div
+          className="flex gap-1 text-2xl font-bold font-hinko cursor-pointer hover:border-b-gray-300 hover:border-b"
+          onClick={() => router.push('/')}
+        >
           <h1 className="text-accent">HIN</h1>
           <h1 className="text-primary dark:text-blue-500">KOR</h1>
         </div>
