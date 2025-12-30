@@ -1,4 +1,7 @@
+import { useToast } from '@/shared/utils'
+
 export default function useWord() {
+  const { warn } = useToast()
   const getBackgroundColors = (position: string) => {
     if (position === 'noun_m') return 'bg-[#ABD8F5]'
     else if (position === 'noun_f') return 'bg-[#FF9595]'
@@ -18,9 +21,13 @@ export default function useWord() {
     else return '정보없음'
   }
   const onSpeak = (word: string) => {
-    const utter = new SpeechSynthesisUtterance(word)
-    utter.lang = 'hi-IN'
-    speechSynthesis.speak(utter)
+    try {
+      const utter = new SpeechSynthesisUtterance(word)
+      utter.lang = 'hi-IN'
+      speechSynthesis.speak(utter)
+    } catch {
+      warn('힌디어 발음은 기기 설정에 따라 지원되지 않을 수 있습니다!')
+    }
   }
   return {
     getBackgroundColors,
