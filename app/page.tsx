@@ -1,16 +1,18 @@
 import { getServerCategoryList } from '@/entities/category/api/getServerCategoryList'
 import { CategoryButton } from '@/features/category'
 import { EmptyData } from '@/shared/ui'
+import { getTranslations } from 'next-intl/server'
 
 export default async function DayPage() {
+  const t = await getTranslations('Common')
   const result = await getServerCategoryList({ label: 'day_list' })
 
   if (!result.ok) {
     switch (result.error) {
       case 'NOT_FOUND':
-        return <EmptyData text="데이터가 없습니다." mode="dark" />
+        return <EmptyData text={t('noData')} mode="dark" />
       default:
-        return <EmptyData text="알 수 없는 오류가 발생하였습니다." mode="dark" />
+        return <EmptyData text={t('unknownError')} mode="dark" />
     }
   }
 

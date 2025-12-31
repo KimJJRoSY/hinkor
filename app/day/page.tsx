@@ -2,13 +2,18 @@ import { DayWordList } from '@/widgets/day-word-list'
 import { EmptyData } from '@/shared/ui'
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 import { getServerWordList } from '@/entities/word/api/server'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata = {
-  title: '날짜',
-  description: '힌디어 단어장 - 날짜별 목록입니다',
+export async function generateMetadata() {
+  const t = await getTranslations('Metadata')
+  return {
+    title: t('dayTitle'),
+    description: t('dayDescription'),
+  }
 }
 
 export default async function DayPage({ searchParams }: { searchParams: { id?: string } }) {
+  const t = await getTranslations('Common')
   const params = await searchParams
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
@@ -17,7 +22,7 @@ export default async function DayPage({ searchParams }: { searchParams: { id?: s
   })
 
   if (!params.id) {
-    return <EmptyData text={'데이터'} mode="light" />
+    return <EmptyData text={t('data')} mode="light" />
   }
 
   return (

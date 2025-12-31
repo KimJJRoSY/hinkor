@@ -2,10 +2,13 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import LocaleSwitcher from './LocaleSwitcher'
 
 export default function Header() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const t = useTranslations('Common')
 
   const isDetailPage = searchParams.get('id')
 
@@ -17,7 +20,7 @@ export default function Header() {
             className="flex items-center text-gray-800 absolute left-0 dark:text-gray-100"
             onClick={() => router.back()}
           >
-            <ChevronLeft className="w-5" /> <p className="text-sm ">뒤로</p>
+            <ChevronLeft className="w-5" /> <p className="text-sm ">{t('back')}</p>
           </button>
         )}
         <div
@@ -26,6 +29,9 @@ export default function Header() {
         >
           <h1 className="text-accent">HIN</h1>
           <h1 className="text-primary dark:text-blue-500">KOR</h1>
+        </div>
+        <div className="absolute right-0">
+          <LocaleSwitcher />
         </div>
       </div>
     </>

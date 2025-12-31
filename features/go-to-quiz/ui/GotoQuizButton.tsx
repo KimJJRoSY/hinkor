@@ -1,10 +1,14 @@
+'use client'
+
 import { MoveToButton } from '@/shared/ui'
 import { BookOpenCheck } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   gotoQuiz: () => void
 }
 
 export default function GotoQuizButton({ gotoQuiz }: Props) {
-  return <MoveToButton label="퀴즈" onClick={gotoQuiz} icon={BookOpenCheck} />
+  const t = useTranslations('Feature')
+  return <MoveToButton label={t('quiz')} onClick={gotoQuiz} icon={BookOpenCheck} />
 }
