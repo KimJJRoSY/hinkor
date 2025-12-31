@@ -42,18 +42,20 @@ export default async function RootLayout({
               <GotoTopButton />
               <footer className="flex flex-col justify-center items-center gap-2 mt-3 text-xs text-gray-400 text-center">
                 <p>© 2025 JeongJooKim</p>
-                <span className="flex items-center gap-1">
+                <p>
                   사용 중 문제가 있거나 의견이 있다면
-                  <a
-                    href="https://github.com/KimJJRoSY/hinkor/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center ml-1 hover:border-b active:border-b cursor-pointer font-bold"
-                  >
-                    <Send size={12} /> 피드백 보내기
-                  </a>
-                  를 눌러주세요.
-                </span>
+                  <span className="flex items-center justify-center gap-1 py-1">
+                    <a
+                      href="https://github.com/KimJJRoSY/hinkor/issues"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center ml-1 hover:bg-gray-200 active:bg-gray-200 cursor-pointer font-bold border p-1 rounded border-gray-400"
+                    >
+                      <Send size={12} /> 피드백 보내기
+                    </a>
+                    를 눌러주세요.
+                  </span>
+                </p>
               </footer>
             </div>
           </div>
