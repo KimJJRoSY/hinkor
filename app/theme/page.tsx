@@ -4,10 +4,14 @@ import ThemeCategoryList from '@/widgets/theme-category-list/ui/ThemeCategoryLis
 import { getServerCategoryList } from '@/entities/category/api/getServerCategoryList'
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 import { getThemeServerWordList } from '@/entities/word/api/server'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata = {
-  title: '테마',
-  description: '힌디어 단어장 - 테마 목록입니다',
+export async function generateMetadata() {
+  const t = await getTranslations('Metadata')
+  return {
+    title: t('themeTitle'),
+    description: t('themeDescription'),
+  }
 }
 
 export default async function ThemePage({ searchParams }: { searchParams: { id?: string } }) {

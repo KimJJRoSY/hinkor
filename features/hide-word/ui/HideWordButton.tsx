@@ -1,5 +1,8 @@
+'use client'
+
 import { MoveToButton } from '@/shared/ui'
 import { Eye, EyeClosed } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   isHidden: boolean
@@ -7,9 +10,11 @@ interface Props {
 }
 
 export default function HideWordButton({ isHidden, handleHideMeaning }: Props) {
+  const t = useTranslations('Feature')
+
   return (
     <MoveToButton
-      label={isHidden ? '뜻 보기' : '뜻 가리기'}
+      label={isHidden ? t('showMeaning') : t('hideMeaning')}
       icon={isHidden ? Eye : EyeClosed}
       onClick={handleHideMeaning}
     />
