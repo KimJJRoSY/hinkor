@@ -31,7 +31,7 @@ export default async function RootLayout({
           <div className="flex justify-center">
             <div className="relative max-w-3xl w-full bg-white p-5 min-h-screen dark:bg-gray-900">
               <ToastContainer />
-              <div className="sticky top-0 z-50">
+              <div className="sticky top-0 z-50 bg-white dark:bg-gray-900">
                 <Suspense fallback={null}>
                   <Header />
                   <NavigationBar />
