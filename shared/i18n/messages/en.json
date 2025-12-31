@@ -1,0 +1,32 @@
+{
+  "Metadata": {
+    "title": "HINKOR | Hindi Vocabulary",
+    "titleTemplate": "%s | Hindi Vocabulary",
+    "description": "Hindi Vocabulary",
+    "dayTitle": "Day",
+    "dayDescription": "Hindi Vocabulary - Daily word list",
+    "themeTitle": "Theme",
+    "themeDescription": "Hindi Vocabulary - Theme word list",
+    "quizTitle": "Quiz",
+    "quizDescription": "Hindi Vocabulary - Quiz list"
+  },
+  "Common": {
+    "back": "Back",
+    "noData": "No data available",
+    "unknownError": "An unknown error occurred",
+    "data": "Data"
+  },
+  "Navigation": {
+    "day": "DAY",
+    "theme": "THEME"
+  },
+  "Feature": {
+    "quiz": "Quiz",
+    "searchPlaceholder": "Enter search term",
+    "showMeaning": "Show meaning",
+    "hideMeaning": "Hide meaning",
+    "checkAntonym": "Check antonym",
+    "speechNotSupported": "Hindi pronunciation may not be supported depending on device settings!",
+    "noInfo": "N/A"
+  }
+}
