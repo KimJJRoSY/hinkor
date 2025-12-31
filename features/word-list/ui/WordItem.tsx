@@ -30,7 +30,7 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
       </span>
       <div className="flex-1 gap-2 items-start">
         <div className="flex gap-2 items-center">
-          <h3 className="font-bold text-lg ">{word.힌디어}</h3>
+          <h3 className="font-bold text-lg">{word.힌디어}</h3>
           <p className="flex-1 text-gray-400 text-xs">{word.힌디어한글발음}</p>
         </div>
 
@@ -42,7 +42,9 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
       </div>
       <button
         onClick={() => onSpeak(word.힌디어)}
-        className="cursor-pointer hover:translate-y-0.5 p-2 rounded hover:bg-gray-200 active:bg-gray-200 "
+        className="cursor-pointer hover:translate-y-0.5 p-2 rounded hover:bg-gray-200 active:bg-gray-200"
+        aria-label={`${word.힌디어} 발음 듣기`}
+        title="발음 듣기"
       >
         <Speech className="w-4 text-gray-400" />
       </button>
