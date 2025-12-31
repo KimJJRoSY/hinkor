@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🇮🇳x🇰🇷 HINKOR-  힌디어 단어장 
 
-## Getting Started
+힌디어 학습을 위한 개인 프로젝트 기반 단어장 & 퀴즈 서비스입니다.
+모바일 사용자 중심 UX와 실제 학습 흐름을 고려해 설계했습니다.
 
-First, run the development server:
+##  프로젝트 소개
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+힌디어 단어장은 힌디어 단어 위주로 학습하고 싶은 사용자를 위한 웹 서비스입니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 단어를 **보고 · 듣고 · 퀴즈로 복습**하는 흐름에 집중
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **모바일 사용자**를 고려한 UI/UX
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 학습 서비스에서 자주 발생하는 불필요한 인터랙션 제거
 
-## Learn More
+*본 프로젝트는 개인 학습 + 포트폴리오 + 기술 기록 목적의 프로젝트입니다.*
 
-To learn more about Next.js, take a look at the following resources:
+## 주요 기능
+**✔️단어 학습**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+힌디어 단어 + 의미 제공
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+단어 발음 음성 재생
 
-## Deploy on Vercel
+모바일에서도 누르기 쉬운 인터랙션 영역
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**✔️퀴즈 기능**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+학습한 단어 기반 퀴즈
+
+진행 상황을 확인할 수 있는 Progress UI
+
+퀴즈 재시작 시 상태 초기화
