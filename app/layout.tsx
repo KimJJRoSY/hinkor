@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { QueryProvider } from '@/shared/provider'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
+import { Send } from 'lucide-react'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Metadata')
@@ -39,9 +40,20 @@ export default async function RootLayout({
               </div>
               <QueryProvider>{children}</QueryProvider>
               <GotoTopButton />
-              <footer className="mt-3 text-xs text-gray-400 text-center">
+              <footer className="flex flex-col justify-center items-center gap-2 mt-3 text-xs text-gray-400 text-center">
                 <p>© 2025 JeongJooKim</p>
-                <a href="https://github.com/KimJJRoSY/hinkor/issues">Issues & Feedback</a>
+                <span className="flex items-center gap-1">
+                  사용 중 문제가 있거나 의견이 있다면
+                  <a
+                    href="https://github.com/KimJJRoSY/hinkor/issues"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center ml-1 hover:border-b active:border-b cursor-pointer font-bold"
+                  >
+                    <Send size={12} /> 피드백 보내기
+                  </a>
+                  를 눌러주세요.
+                </span>
               </footer>
             </div>
           </div>
