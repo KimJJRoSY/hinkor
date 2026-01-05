@@ -1,7 +1,7 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
-import nextPlugin from 'eslint-config-next'
 import prettier from 'eslint-config-prettier'
+import globals from 'globals'
 
 export default [
   {
@@ -15,19 +15,31 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
-      globals: {
-        browser: true,
-        node: true,
-        es2021: true,
-      },
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
-      '@typescript-eslint/no-unused-vars': 'error',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error'],
       'no-console': 'error',
+    },
+  },
+
+  // 브라우저
+  {
+    files: ['**/*.{jsx,tsx}'],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+
+  // Node / 서버
+  {
+    files: ['**/*.{js,ts}'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
   prettier,
