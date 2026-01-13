@@ -21,7 +21,6 @@ export default function QuizContainer({ data }: Props) {
   } = useQuiz({ data })
   const USER_SCORE = quizList.length - wrongList.length
   const TOTAL = quizList.length
-  const USER_CURRENT_INDEX = currentIndex + 1
 
   return (
     <>
@@ -37,11 +36,7 @@ export default function QuizContainer({ data }: Props) {
         </>
       ) : (
         <>
-          <ProgressBar
-            current={USER_CURRENT_INDEX}
-            total={TOTAL}
-            value={(USER_CURRENT_INDEX / TOTAL) * 100}
-          />
+          <ProgressBar current={currentIndex} total={TOTAL} value={(currentIndex / TOTAL) * 100} />
           <div className="flex flex-1 flex-col items-center justify-center gap-10">
             <QuizItem question={quizList[currentIndex].question} />
             <div className="flex flex-col gap-6 items-center">
