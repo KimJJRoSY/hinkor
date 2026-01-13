@@ -16,7 +16,7 @@ export default function WordItem({ word, isHidden, isLast }: Props) {
   return (
     <div
       className={twMerge(
-        'p-4 border-b border-gray-200 flex gap-2 items-start rounded dark:rounded-b-none',
+        'p-4 border-b border-gray-200 flex gap-2 items-start bg-white dark:bg-gray-800',
         isLast && 'border-none',
       )}
     >
